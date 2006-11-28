@@ -8,7 +8,7 @@ Class::DBI::Cascade::Nullify - Nullify any related Class::DBI objects
 
     package Music::Artist;
     #define your class here
-    Music::Artist->has_many(cds => 'Music::CD', {cascade => 'Class::DBI::Cascade::Plugin::Nullify'});
+    Music::Artist->has_many(cds => 'Music::CD', {cascade => 'Class::DBI::Cascade::Nullify'});
 
 =head1 DESCRIPTION
 
@@ -21,9 +21,10 @@ use warnings;
 
 use base 'Class::DBI::Cascade::None';
 
-our $VERSION = 0.01;
+our $VERSION = 0.02;
 
-sub cascade {
+sub cascade 
+{
 	my ($self, $obj) = @_;
 	my $foreign_objects = $self->foreign_for($obj);
 	my $foreign_key = $self->{_rel}->args->{foreign_key};
